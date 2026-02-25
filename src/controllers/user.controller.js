@@ -4,7 +4,7 @@ import {User} from "../models/user.model.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const registerUser = asyncHandler(async(req,res)=>{
-    const {name,age,address,aadhaarCardNumber,password,email}=req.body
+    const {name,age,address,aadhaarCardNumber,password,email,role}=req.body
 
     if(!name||!age||!address||!aadhaarCardNumber||!password)
     {
@@ -22,7 +22,7 @@ const registerUser = asyncHandler(async(req,res)=>{
         address,
         password,
         aadhaarCardNumber,
-        email:email || ""
+        email:email || "",role
     })
     const accessToken = user.generateAccessToken()
     const createdUser = await User.findById(user._id).select("-password")
